@@ -85,6 +85,9 @@
     const inputText = document.getElementById('inputField').value; // Get the text from the textarea
     const header = document.getElementById('headerText'); // Get the header element
     header.textContent = inputText; // Set the input text as the header text
+
+    // Save the updated text to localStorage
+    localStorage.setItem('savedText', inputText);
   }
 
   // Function to copy the content of the header to clipboard
@@ -101,8 +104,19 @@
 
     alert('Text copied to clipboard!');
   }
+
+  // Check if there is saved text in localStorage and update the header
+  window.onload = function() {
+    const savedText = localStorage.getItem('savedText');
+    if (savedText) {
+      // Set the header text and the textarea value if there's saved text
+      document.getElementById('headerText').textContent = savedText;
+      document.getElementById('inputField').value = savedText;
+    }
+  };
 </script>
 
 </body>
 </html>
+
 
