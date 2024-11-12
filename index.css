@@ -1,0 +1,139 @@
+.frame1-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.frame1-frame1 {
+  width: 100%;
+  height: 1117px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-size: cover;
+  background-image: url("public/external/tq_kmtrkby4rd-daaj-1200h.png");
+}
+.frame1-frame2 {
+  top: 82.6624526977539px;
+  left: 522px;
+  width: 678px;
+  height: 108px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(60, 60, 67, 0.28999999165534973);
+}
+.frame1-text1 {
+  top: -15.335399627685547px;
+  left: 25.025888442993164px;
+  color: rgba(255, 255, 255, 1);
+  width: 633px;
+  height: auto;
+  position: absolute;
+  font-size: 64px;
+  box-shadow: 0px 16px 32px -8px rgba(12, 12, 13, 0.4000000059604645) ;
+  font-style: Regular;
+  text-align: center;
+  font-family: Pixelify Sans;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.frame1-frame5 {
+  top: 479px;
+  left: 524px;
+  width: 340px;
+  height: 458px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.frame1-text2 {
+  top: 90px;
+  left: 9px;
+  color: rgba(255, 255, 255, 1);
+  height: auto;
+  position: absolute;
+  font-size: 64px;
+  box-shadow: 0px 16px 32px -8px rgba(12, 12, 13, 0.4000000059604645) ;
+  font-style: Regular;
+  text-align: left;
+  font-family: Pixelify Sans;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.frame1-text3 {
+  left: 9px;
+  color: rgba(255, 255, 255, 1);
+  height: auto;
+  position: absolute;
+  font-size: 64px;
+  box-shadow: 0px 16px 32px -8px rgba(12, 12, 13, 0.4000000059604645) ;
+  font-style: Regular;
+  text-align: left;
+  font-family: Pixelify Sans;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.frame1-frame4 {
+  top: 479px;
+  left: 864px;
+  width: 340px;
+  height: 458px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.frame1-text4 {
+  top: 90px;
+  left: 9px;
+  color: rgba(255, 255, 255, 1);
+  height: auto;
+  position: absolute;
+  font-size: 64px;
+  box-shadow: 0px 16px 32px -8px rgba(12, 12, 13, 0.4000000059604645) ;
+  font-style: Regular;
+  text-align: left;
+  font-family: Pixelify Sans;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.frame1-text5 {
+  left: 9px;
+  color: rgba(255, 255, 255, 1);
+  height: auto;
+  position: absolute;
+  font-size: 64px;
+  box-shadow: 0px 16px 32px -8px rgba(12, 12, 13, 0.4000000059604645) ;
+  font-style: Regular;
+  text-align: left;
+  font-family: Pixelify Sans;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.frame1-arrow1 {
+  top: 229px;
+  left: 341px;
+  width: 1050px;
+  height: 1px;
+  position: absolute;
+}
