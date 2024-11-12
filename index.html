@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Note</title>
+  <title>Update Header from Input</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,28 +12,23 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      background: #f0f0f0;
+      background: #f4f4f4;
     }
 
     .container {
-      width: 80%;
-      max-width: 600px;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
 
-    textarea {
-      width: 100%;
-      height: 300px;
-      font-family: monospace;
+    input {
+      padding: 10px;
       font-size: 16px;
-      padding: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      width: 80%;
       margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #333;
     }
 
     button {
@@ -55,49 +50,18 @@
 <body>
 
 <div class="container">
-  <h1>Edit Note</h1>
-  
-  <!-- Textarea to display and edit the content of 'note.txt' -->
-  <textarea id="noteContent" placeholder="Write your note here..."></textarea>
+  <input type="text" id="inputField" placeholder="Enter text here" />
+  <button onclick="updateHeader()">Update Header</button>
 
-  <!-- Button to save the content to 'note.txt' -->
-  <button onclick="saveNote()">Save Note</button>
-
-  <h3>Note Content</h3>
-  <pre id="noteDisplay"></pre> <!-- Display the content below the textarea -->
+  <h1 id="headerText">Your text will appear here</h1>
 </div>
 
 <script>
-  // Function to fetch and display the content from 'note.txt' when the page loads
-  window.onload = function() {
-    fetch('/get-note')
-      .then(response => response.json())
-      .then(data => {
-        const noteContent = data.text;
-        document.getElementById('noteContent').value = noteContent;  // Set the textarea content
-        document.getElementById('noteDisplay').textContent = noteContent; // Display it below the textarea
-      })
-      .catch(error => console.error('Error fetching note:', error));
-  };
-
-  // Function to save the content of the textarea to 'note.txt'
-  function saveNote() {
-    const noteContent = document.getElementById('noteContent').value;
-
-    // Send the new note content to the server to update 'note.txt'
-    fetch('/save-note', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ text: noteContent })
-    })
-    .then(response => response.text())
-    .then(data => {
-      alert(data);  // Alert the user that the note was saved
-      document.getElementById('noteDisplay').textContent = noteContent;  // Display it below the textarea
-    })
-    .catch(error => console.error('Error saving note:', error));
+  // Function to update the header text from the input field
+  function updateHeader() {
+    const inputText = document.getElementById('inputField').value; // Get the value from input field
+    const header = document.getElementById('headerText'); // Get the header element
+    header.textContent = inputText; // Set the input text as the header text
   }
 </script>
 
