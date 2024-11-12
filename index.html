@@ -3,103 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paste Text and Copy to Clipboard (Custom Background)</title>
+  <title>Edit Note</title>
   <style>
-    /* Base styles for body with custom background */
     body {
       font-family: Arial, sans-serif;
       display: flex;
-      align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      align-items: center;
+      height: 100vh;
       margin: 0;
-      background: url('Sin título.png') no-repeat center center fixed; /* Use the uploaded image as background */
-      background-size: cover; /* Cover the entire page */
-      color: #f1f1f1;
-      overflow: hidden;
+      background: #f0f0f0;
     }
 
-    /* Container styles */
     .container {
-      position: relative;
-      width: 90%;
+      width: 80%;
       max-width: 600px;
-      background-color: rgba(46, 46, 46, 0.85); /* Semi-transparent background for readability */
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       text-align: center;
-      z-index: 1; /* Ensure container is above background */
     }
 
-    /* Heading styles */
-    h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      color: #f1f1f1;
-    }
-
-    /* Textarea styles for code-like appearance */
     textarea {
       width: 100%;
       height: 300px;
       font-family: monospace;
-      font-size: 14px;
-      color: #d4d4d4;
-      white-space: pre;
-      background-color: #1e1e1e;
-      border: 1px solid #555;
-      border-radius: 5px;
+      font-size: 16px;
       padding: 15px;
-      resize: none;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
-      outline: none;
-      transition: border 0.3s ease;
-    }
-    textarea:focus {
-      border-color: #007acc;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 20px;
     }
 
-    /* Button styles for dark mode */
     button {
-      margin-top: 20px;
-      padding: 12px 25px;
+      padding: 10px 20px;
       font-size: 16px;
-      font-weight: bold;
+      cursor: pointer;
+      background-color: #007bff;
       color: white;
-      background-color: #007acc;
       border: none;
       border-radius: 5px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background-color: #005f99;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h2>Paste Text and Copy to Clipboard</h2>
+  <h1>Edit Note</h1>
   
-  <!-- Button to copy content to clipboard -->
-  <button onclick="copyToClipboard()">Copy to Clipboard</button>
-  
-  <!-- Textarea to paste text content -->
-  <textarea id="textContent" placeholder="Paste your code or text here..."></textarea>
+  <!-- Textarea to display and edit the content of 'note.txt' -->
+  <textarea id="noteContent" placeholder="Write your note here..."></textarea>
+
+  <!-- Button to save the content to 'note.txt' -->
+  <button onclick="saveNote()">Save Note</button>
+
+  <h3>Note Content</h3>
+  <pre id="noteDisplay"></pre> <!-- Display the content below the textarea -->
 </div>
 
 <script>
-  // Function to copy content of textarea to clipboard
-  function copyToClipboard() {
-    const textArea = document.getElementById("textContent");
-    textArea.select();
-    textArea.setSelectionRange(0, 99999); // For mobile devices
-    document.execCommand("copy");
-    alert("Text copied to clipboard!");
+  // Function to fetch and display the content from 'note.txt' when the page loads
+  window.onload = function() {
+    fetch('/get-note')
+      .then(response => response.json())
+      .then(data => {
+        const noteContent = data.text;
+        document.getElementById('noteContent').value = noteContent;  // Set the textarea content
+        document.getElementById('noteDisplay').textContent = noteContent; // Display it below the textarea
+      })
+      .catch(error => console.error('Error fetching note:', error));
+  };
+
+  // Function to save the content of the textarea to 'note.txt'
+  function saveNote() {
+    const noteContent = document.getElementById('noteContent').value;
+
+    // Send the new note content to the server to update 'note.txt'
+    fetch('/save-note', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ text: noteContent })
+    })
+    .then(response => response.text())
+    .then(data => {
+      alert(data);  // Alert the user that the note was saved
+      document.getElementById('noteDisplay').textContent = noteContent;  // Display it below the textarea
+    })
+    .catch(error => console.error('Error saving note:', error));
   }
 </script>
 
