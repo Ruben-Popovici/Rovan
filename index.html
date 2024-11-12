@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update Header with Text and Copy to Clipboard</title>
+  <title>Update Header and Save to GitHub</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -40,7 +40,7 @@
     h1 {
       font-size: 24px;
       color: #333;
-      word-wrap: break-word; /* Ensure text wraps properly */
+      word-wrap: break-word;
     }
 
     button {
@@ -57,10 +57,6 @@
     button:hover {
       background-color: #0056b3;
     }
-
-    .button-container {
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
@@ -68,51 +64,70 @@
 <div class="container">
   <h1 id="headerText">Your formatted text will appear here</h1>
 
-  <!-- Textarea to input text or code -->
   <textarea id="inputField" placeholder="Paste your text or code here"></textarea>
 
-  <!-- Buttons to update header and copy to clipboard -->
   <button onclick="updateHeader()">Update Header</button>
-
-  <div class="button-container">
-    <button onclick="copyToClipboard()">Copy to Clipboard</button>
-  </div>
+  <button onclick="saveToGitHub()">Save to GitHub</button>
 </div>
 
 <script>
+  const GITHUB_TOKEN = 'YOUR_GITHUB_PERSONAL_ACCESS_TOKEN';
+  const REPO_NAME = 'your-repo-name';
+  const FILE_PATH = 'note.txt';
+  const BRANCH_NAME = 'main'; // or 'master', depending on your default branch
+
   // Function to update the header with the text from the input field
   function updateHeader() {
-    const inputText = document.getElementById('inputField').value; // Get the text from the textarea
-    const header = document.getElementById('headerText'); // Get the header element
-    header.textContent = inputText; // Set the input text as the header text
-
-    // Save the updated text to localStorage
-    localStorage.setItem('savedText', inputText);
+    const inputText = document.getElementById('inputField').value;
+    const header = document.getElementById('headerText');
+    header.textContent = inputText;
   }
 
-  // Function to copy the content of the header to clipboard
-  function copyToClipboard() {
-    const headerText = document.getElementById('headerText').textContent; // Get the header text
+  // Function to save the text to GitHub
+  function saveToGitHub() {
+    const inputText = document.getElementById('inputField').value;
 
-    // Create a temporary textarea element to copy the text
-    const tempTextArea = document.createElement('textarea');
-    tempTextArea.value = headerText; // Set the value to the header's text
-    document.body.appendChild(tempTextArea);
-    tempTextArea.select(); // Select the content of the textarea
-    document.execCommand('copy'); // Copy to clipboard
-    document.body.removeChild(tempTextArea); // Remove the temporary element
-
-    alert('Text copied to clipboard!');
+    // Create the GitHub API request to update the file
+    fetch(`https://api.github.com/repos/${REPO_NAME}/contents/${FILE_PATH}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'Update note.txt with new text',
+        content: btoa(inputText), // Base64 encode the text content
+        branch: BRANCH_NAME
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.commit) {
+        alert('Text saved to GitHub!');
+      } else {
+        alert('Failed to save text to GitHub.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while saving to GitHub.');
+    });
   }
 
-  // Check if there is saved text in localStorage and update the header
+  // Check if there’s existing content on GitHub and load it into the header
   window.onload = function() {
-    const savedText = localStorage.getItem('savedText');
-    if (savedText) {
-      // Set the header text and the textarea value if there's saved text
-      document.getElementById('headerText').textContent = savedText;
-      document.getElementById('inputField').value = savedText;
-    }
+    fetch(`https://api.github.com/repos/${REPO_NAME}/contents/${FILE_PATH}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.content) {
+          const content = atob(data.content); // Decode the Base64 content
+          document.getElementById('headerText').textContent = content;
+          document.getElementById('inputField').value = content;
+        }
+      })
+      .catch(error => {
+        console.error('Error loading file:', error);
+      });
   };
 </script>
 
