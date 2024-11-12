@@ -1,145 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Global Website</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Optional for styling -->
-</head>
-<body>
-    <header>
-        <h1>Welcome to My Global Website!</h1>
-    </header>
 
-    <section>
-        <p>#include <iostream>
-#include <cmath>
-#include <vector>
-#include <vector>
-using namespace std;
+<html lang="english">
+  <head>
+    <title>exported project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;  -webkit-font-smoothing: antialiased;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;  color: inherit;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
 
-void render(vector<vector<string>> v){
-    for(int i = 0; i < v.size(); i++){
-        for(int j = 0; j < v[i].size(); j++){
-            cout << v[i][j];
-            if(j<2)
-                cout<<"|";
-        }
-        cout << endl;
-        if(i<2)
-            cout<<" _   _   _ "<<endl;
-    }
-}
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-theme-neutral-dark);
+        background: var(--dl-color-theme-neutral-light);
 
-void win(vector<vector<string>> v)
-{
-    int a = 0, b = 0;
-    int intx = 0;
-    int into = 0;
-    string x = " X ";
-    string o = " O ";
-    
-    while(a<3){
-        if(v[a][0] == x)
-    }
-    
-    
-    /*if(v[a][b] == x){
-        intx++;
-        if(v[a][b + 1] == x){
-            intx++;
-            if(v[a][b + 2] == x)
-                intx++;
-        }
-    }*/
-    if(intx == 3)
-        cout<<"x won"<<endl;
-
-}
-
-
-void input(int z, int &a, int &b){
-    if(z == 7){
-        a = 0;
-        b = 0;
-    }
-    if(z == 8){
-        a = 0;
-        b = 1;
-    }
-    if(z == 9){
-        a = 0;
-        b = 2;
-    }
-    if(z == 4){
-        a = 1;
-        b = 0;
-    }
-    if(z == 5){
-        a = 1;
-        b = 1;
-    }
-    if(z == 6){
-        a = 1;
-        b = 2;
-    }
-    if(z == 1){
-        a = 2;
-        b = 0;
-    }
-    if(z == 2){
-        a = 2;
-        b = 1;
-    }
-    if(z == 3){
-        a = 2;
-        b = 2;
-    }
-}
-
-int main()
-{
-        
-    vector<vector<string>> v
-    {
-        {"   " , "   " , "   "},
-        {"   " , "   " , "   "},
-        {"   " , "   " , "   "}
-    };
-    int a = 1, b = 1; 
-    int x = 0, z;
-    bool player;
-    int playerX = 0;
-    int playerO = 0;
-    render(v);
-    while(x<10){
-        player = true;
-        cout<<"Enter coordenates: ";
-        cin>>z;
-        input(z, a, b);
-        if(playerX == playerO){
-            v[a][b] = " X ";
-            player = false;
-            playerX++;
-        }
-        else{
-            v[a][b] = " O ";
-            playerO++;
-        }
-        render(v);
-        x++;
-        win(v);
-    }
-    
-    render(v);
-    
-
-}</p>
-    </section>
-
-    <footer>
-        <p>© 2024 My Global Website</p>
-    </footer>
-</body>
+        fill: var(--dl-color-theme-neutral-dark);
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/animate.css@4.1.1/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+    />
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
 </html>
+
