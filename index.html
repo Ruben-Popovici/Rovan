@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Update Header from Input</title>
+  <title>Update Header with Text and Copy to Clipboard</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,18 +17,30 @@
 
     .container {
       text-align: center;
+      width: 80%;
+      max-width: 600px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    input {
-      padding: 10px;
+    textarea {
+      width: 100%;
+      height: 150px;
+      font-family: monospace;
       font-size: 16px;
-      width: 80%;
+      padding: 10px;
       margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
     }
 
     h1 {
-      font-size: 36px;
+      font-size: 24px;
       color: #333;
+      word-wrap: break-word; /* Ensure text wraps properly */
     }
 
     button {
@@ -45,25 +57,52 @@
     button:hover {
       background-color: #0056b3;
     }
+
+    .button-container {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <input type="text" id="inputField" placeholder="Enter text here" />
+  <h1 id="headerText">Your formatted text will appear here</h1>
+
+  <!-- Textarea to input text or code -->
+  <textarea id="inputField" placeholder="Paste your text or code here"></textarea>
+
+  <!-- Buttons to update header and copy to clipboard -->
   <button onclick="updateHeader()">Update Header</button>
 
-  <h1 id="headerText">Your text will appear here</h1>
+  <div class="button-container">
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
+  </div>
 </div>
 
 <script>
-  // Function to update the header text from the input field
+  // Function to update the header with the text from the input field
   function updateHeader() {
-    const inputText = document.getElementById('inputField').value; // Get the value from input field
+    const inputText = document.getElementById('inputField').value; // Get the text from the textarea
     const header = document.getElementById('headerText'); // Get the header element
     header.textContent = inputText; // Set the input text as the header text
+  }
+
+  // Function to copy the content of the header to clipboard
+  function copyToClipboard() {
+    const headerText = document.getElementById('headerText').textContent; // Get the header text
+
+    // Create a temporary textarea element to copy the text
+    const tempTextArea = document.createElement('textarea');
+    tempTextArea.value = headerText; // Set the value to the header's text
+    document.body.appendChild(tempTextArea);
+    tempTextArea.select(); // Select the content of the textarea
+    document.execCommand('copy'); // Copy to clipboard
+    document.body.removeChild(tempTextArea); // Remove the temporary element
+
+    alert('Text copied to clipboard!');
   }
 </script>
 
 </body>
 </html>
+
