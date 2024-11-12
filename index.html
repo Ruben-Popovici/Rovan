@@ -13,7 +13,129 @@
     </header>
 
     <section>
-        <p>This is a simjaja the world can access.</p>
+        <p>#include <iostream>
+#include <cmath>
+#include <vector>
+#include <vector>
+using namespace std;
+
+void render(vector<vector<string>> v){
+    for(int i = 0; i < v.size(); i++){
+        for(int j = 0; j < v[i].size(); j++){
+            cout << v[i][j];
+            if(j<2)
+                cout<<"|";
+        }
+        cout << endl;
+        if(i<2)
+            cout<<" _   _   _ "<<endl;
+    }
+}
+
+void win(vector<vector<string>> v)
+{
+    int a = 0, b = 0;
+    int intx = 0;
+    int into = 0;
+    string x = " X ";
+    string o = " O ";
+    
+    while(a<3){
+        if(v[a][0] == x)
+    }
+    
+    
+    /*if(v[a][b] == x){
+        intx++;
+        if(v[a][b + 1] == x){
+            intx++;
+            if(v[a][b + 2] == x)
+                intx++;
+        }
+    }*/
+    if(intx == 3)
+        cout<<"x won"<<endl;
+
+}
+
+
+void input(int z, int &a, int &b){
+    if(z == 7){
+        a = 0;
+        b = 0;
+    }
+    if(z == 8){
+        a = 0;
+        b = 1;
+    }
+    if(z == 9){
+        a = 0;
+        b = 2;
+    }
+    if(z == 4){
+        a = 1;
+        b = 0;
+    }
+    if(z == 5){
+        a = 1;
+        b = 1;
+    }
+    if(z == 6){
+        a = 1;
+        b = 2;
+    }
+    if(z == 1){
+        a = 2;
+        b = 0;
+    }
+    if(z == 2){
+        a = 2;
+        b = 1;
+    }
+    if(z == 3){
+        a = 2;
+        b = 2;
+    }
+}
+
+int main()
+{
+        
+    vector<vector<string>> v
+    {
+        {"   " , "   " , "   "},
+        {"   " , "   " , "   "},
+        {"   " , "   " , "   "}
+    };
+    int a = 1, b = 1; 
+    int x = 0, z;
+    bool player;
+    int playerX = 0;
+    int playerO = 0;
+    render(v);
+    while(x<10){
+        player = true;
+        cout<<"Enter coordenates: ";
+        cin>>z;
+        input(z, a, b);
+        if(playerX == playerO){
+            v[a][b] = " X ";
+            player = false;
+            playerX++;
+        }
+        else{
+            v[a][b] = " O ";
+            playerO++;
+        }
+        render(v);
+        x++;
+        win(v);
+    }
+    
+    render(v);
+    
+
+}</p>
     </section>
 
     <footer>
