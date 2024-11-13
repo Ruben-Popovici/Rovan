@@ -15,9 +15,6 @@
         h1 {
             color: #333;
         }
-        .file-input {
-            margin-bottom: 20px;
-        }
         pre {
             background-color: #f4f4f4;
             padding: 15px;
@@ -33,37 +30,23 @@
 <body>
 
     <h1>Display Note File Content</h1>
-
-    <input type="file" class="file-input" accept=".txt" />
-
-    <pre id="fileContent">Please select a note.txt file to display its content.</pre>
+    <pre id="fileContent">Loading content...</pre>
 
     <script>
-        // Selecting the file input and display element
-        const fileInput = document.querySelector('.file-input');
-        const fileContent = document.getElementById('fileContent');
-
-        fileInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-
-            if (file && file.type === "text/plain") {
-                const reader = new FileReader();
-
-                // Event listener to process the file after reading
-                reader.onload = function(e) {
-                    fileContent.textContent = e.target.result;
-                };
-
-                reader.onerror = function() {
-                    fileContent.textContent = "Error reading file!";
-                };
-
-                // Read the file as text
-                reader.readAsText(file);
-            } else {
-                fileContent.textContent = "Please upload a valid .txt file.";
-            }
-        });
+        // Fetching the file and displaying its content
+        fetch('note.txt')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.text();
+            })
+            .then(text => {
+                document.getElementById('fileContent').textContent = text;
+            })
+            .catch(error => {
+                document.getElementById('fileContent').textContent = "Error loading file: " + error.message;
+            });
     </script>
 
 </body>
