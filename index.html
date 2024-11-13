@@ -3,27 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Note</title>
+    <title>Display Note - Dark Mode with Copy Feature</title>
     <style>
+        /* Background styling */
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-color: #1a1a1a; /* Dark fallback color */
+            background-image: url('Sin título.png'); /* Adjust this path if in a subfolder */
+            background-size: cover;
+            background-position: center;
+            color: #ffffff; /* Light text for dark mode */
+            height: 100vh;
         }
         h1 {
-            color: #333;
+            color: #ffffff;
         }
         pre {
-            background-color: #f4f4f4;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            color: #ffffff; /* Light text color */
             padding: 15px;
             border-radius: 5px;
-            border: 1px solid #ddd;
-            white-space: pre-wrap; /* Preserves spaces and line breaks */
+            border: 1px solid #444;
+            white-space: pre-wrap; /* Preserve spaces and line breaks */
             width: 100%;
             max-width: 600px;
             overflow-x: auto;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -31,6 +53,7 @@
 
     <h1>Display Note File Content</h1>
     <pre id="fileContent">Loading content...</pre>
+    <button onclick="copyText()">Copy Text</button>
 
     <script>
         // Fetching the file and displaying its content
@@ -47,10 +70,22 @@
             .catch(error => {
                 document.getElementById('fileContent').textContent = "Error loading file: " + error.message;
             });
+
+        // Copy function to copy the content of the pre element
+        function copyText() {
+            const fileContent = document.getElementById('fileContent').textContent;
+
+            navigator.clipboard.writeText(fileContent).then(() => {
+                alert("Text copied to clipboard!");
+            }).catch(err => {
+                alert("Failed to copy text: " + err);
+            });
+        }
     </script>
 
 </body>
 </html>
+
 
 
 
