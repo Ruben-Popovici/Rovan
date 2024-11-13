@@ -20,66 +20,39 @@ void render(vector<vector<string>> v)
     }
 }
 
-int win(vector<vector<string>> v, string litera)
+void win(vector<vector<string>> v, string litera, int &x)
 {
     int i = 0; int j = 0;
     int won = false;
-    while(!won)
-    {
-        if(v[0][0] == litera && v[0][1] == litera && v[0][2] == litera)
-            won = true;
-        else if(v[1][0] == litera && v[1][1] == litera && v[1][2] == litera)
-            won = true;
-        else if(v[2][0] == litera && v[2][1] == litera && v[2][2] == litera)
-            won = true;
-        else if(v[0][0] == litera && v[1][0] == litera && v[2][0] == litera)
-            won = true;
-        else if(v[0][1] == litera && v[1][1] == litera && v[2][1] == litera)
-            won = true;
-        else if(v[0][2] == litera && v[1][2] == litera && v[2][2] == litera)
-            won = true;
-        else if(v[0][0] == litera && v[1][1] == litera && v[2][2] == litera)
-            won = true;
-        else if(v[0][2] == litera && v[1][1] == litera && v[2][0] == litera)
-            won = true;
-    }
-
+    
+    if(v[0][0] == litera && v[0][1] == litera && v[0][2] == litera)
+        won = true;
+    else if(v[1][0] == litera && v[1][1] == litera && v[1][2] == litera)
+        won = true;
+    else if(v[2][0] == litera && v[2][1] == litera && v[2][2] == litera)
+        won = true;
+    else if(v[0][0] == litera && v[1][0] == litera && v[2][0] == litera)
+        won = true;
+    else if(v[0][1] == litera && v[1][1] == litera && v[2][1] == litera)
+        won = true;
+    else if(v[0][2] == litera && v[1][2] == litera && v[2][2] == litera)
+        won = true;
+    else if(v[0][0] == litera && v[1][1] == litera && v[2][2] == litera)
+        won = true;
+    else if(v[0][2] == litera && v[1][1] == litera && v[2][0] == litera)
+        won = true;
+    
     if(won)
     {
-        cout<< litera + " a castigat!";
-        return 1;
+        cout<< litera + "a castigat!"<<endl;
+        x = 1;
     }
-    else
-        return 0;
-    /*string x = " X ";
-    string o = " O ";
-    int ix = 0;
-    int io = 0;
-    int i = 0;
-    int j = 0;
-    string p = "";
-
-    for(i = 0; i < v.size(); i++)
-    {
-        p = v[i][j];
-        if(p == x)
-            ix++;
-        else if(p == o)
-            io++;
-        else
-            continue;
-
-    }
-    cout<<ix<<" "<<io<<endl;*/
 
 }
 
 
 void input(int z, int &a, int &b, string player)
 {
-    cout<<"pozitia pentru" + player + ": ";
-    cin>>z;
-
     switch(z)
     {
         case 1:
@@ -127,20 +100,6 @@ void input(int z, int &a, int &b, string player)
 
 }
 
-int finish(vector<vector<string>> v)
-{
-    int nr;
-    for(int i = 0; i < v.size(); i++)
-    {
-        for(int j = 0; j < v.size(); j++)
-        {
-            if(v[i][j] == " X " || v[i][j] == " O ");
-                nr++;
-        }
-    }
-    return nr;
-}
-
 int main()
 {
     vector<vector<string>> v
@@ -149,12 +108,17 @@ int main()
         {"   ", "   ", "   "},
         {"   ", "   ", "   "}
     };
-
     render(v);
+
+
     string player = " X ";
     int playerX, playerO;
+    int winX = 0, winO = 0;
+    int won = 0;
     int n = 0;
     int z = 0 , a , b;
+    playerX = playerO;
+    int x = 0;
 
     while(n < 9)
     {
@@ -163,25 +127,33 @@ int main()
             player = " X ";
             playerX++;
         }
-        else
+        else if(playerX > playerO)
         {
             player = " O ";
             playerO++;
         }
+
+        cout<<"pozitia pentru" + player + ": ";
+        cin>>z;
+
         input(z, a, b , player);
+
+        while(v[a][b] == " X " || v[a][b] == " O ")
+        {
+            z = 0;
+            input(z , a , b, player);
+        }
         v[a][b] = player;
         render(v);
-        if(playerX >= 3 || playerO >= 3)
+
+        if(playerX > 3)
         {
-            if(win(v, " X ") == 1){
-                cout<< "X a castigat"<<endl;
-            }
-            if(win(v, " O ") == 1);
-                cout<< "O a castigat"<<endl;
-
+            win(v, player, x);
+            if(x == 1)
+                break;
         }
-        n++;
 
+        n++;
     }
 
 
