@@ -23,6 +23,7 @@
         <div id="unity-build-title">prototipo3</div>
       </div>
     </div>
+  </div>
     <script>
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
@@ -67,6 +68,12 @@
         productVersion: "0.1",
         showBanner: unityShowBanner,
       };
+
+
+
+
+      // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
 
       // By default, Unity keeps WebGL canvas render target size matched with
       // the DOM size of the canvas element (scaled by window.devicePixelRatio)
@@ -114,9 +121,11 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
+          window.unityInstance = unityInstance;
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
+
           };
         }).catch((message) => {
           alert(message);
@@ -124,5 +133,6 @@
       };
       document.body.appendChild(script);
     </script>
-  </body>
+      <div style="border: solid 1px black; width: 200px; height: 30px; margin: auto; text-align: center;"onclick="unityInstance.SendMessage('CubeOb', 'Size')">SIZE</div>
+</body>
 </html>
